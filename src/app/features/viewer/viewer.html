@@ -1,0 +1,28 @@
+<div class="viewer-container">
+  <canvas #canvas class="scene-canvas"></canvas>
+
+  <div class="controls-overlay">
+    <app-speed-control />
+  </div>
+
+  <div class="buttons-overlay">
+    <button (click)="toggleOrbits()">
+      {{ state.showOrbits() ? '🔵 Orbites ON' : '⚫ Orbites OFF' }}
+    </button>
+    <button (click)="togglePause()">
+      {{ state.isPaused() ? '▶ Play' : '⏸ Pause' }}
+    </button>
+  </div>
+
+  @if (state.selectedPlanet()) {
+    <app-planet-panel
+      [planet]="state.selectedPlanet()"
+      (close)="state.selectPlanet(null)" />
+  }
+
+  @if (loading) {
+    <div class="loading-overlay">
+      <p>🚀 Chargement du système solaire...</p>
+    </div>
+  }
+</div>
