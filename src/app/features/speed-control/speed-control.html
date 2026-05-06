@@ -1,1 +1,10 @@
-<p>speed-control works!</p>
+<div class="speed-control">
+  <label>⚡ Vitesse : {{ state.simulationSpeed() }}x</label>
+  <input
+    type="range"
+    min="1"
+    max="1000"
+    step="10"
+    [value]="state.simulationSpeed()"
+    (input)="onSpeedChange($event)" />
+</div>

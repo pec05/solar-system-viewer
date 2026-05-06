@@ -1,0 +1,20 @@
+.speed-control {
+  background: rgba(0, 0, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  backdrop-filter: blur(6px);
+
+  label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  input[type="range"] {
+    width: 160px;
+    accent-color: #7de8e8;
+  }
+}

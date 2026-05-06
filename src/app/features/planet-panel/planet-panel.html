@@ -1,1 +1,41 @@
-<p>planet-panel works!</p>
+<div class="panel">
+  <button class="close-btn" (click)="onClose()">✕</button>
+
+  <h2 class="planet-name">{{ planet.englishName }}</h2>
+  <p class="planet-subname">{{ planet.name }}</p>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="label">Rayon moyen</span>
+      <span class="value">{{ planet.meanRadius | number:'1.0-0' }} km</span>
+    </div>
+    <div class="stat">
+      <span class="label">Gravité</span>
+      <span class="value">{{ planet.gravity }} m/s²</span>
+    </div>
+    <div class="stat">
+      <span class="label">Période orbitale</span>
+      <span class="value">{{ planet.sideralOrbit | number:'1.0-1' }} jours</span>
+    </div>
+    <div class="stat">
+      <span class="label">Rotation</span>
+      <span class="value">{{ planet.sideralRotation | number:'1.0-1' }} h</span>
+    </div>
+    <div class="stat">
+      <span class="label">Distance du Soleil</span>
+      <span class="value">{{ planet.distanceFromSun }} UA</span>
+    </div>
+    <div class="stat">
+      <span class="label">Température moy.</span>
+      <span class="value">{{ formatTemp(planet.avgTemp) }}</span>
+    </div>
+    <div class="stat">
+      <span class="label">Masse</span>
+      <span class="value">{{ formatMass(planet) }}</span>
+    </div>
+    <div class="stat">
+      <span class="label">Lunes</span>
+      <span class="value">{{ planet.moonCount }}</span>
+    </div>
+  </div>
+</div>

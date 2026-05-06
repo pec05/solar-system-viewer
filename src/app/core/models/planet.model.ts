@@ -13,6 +13,7 @@ export interface Planet {
   gravity: number;
   avgTemp: number;
   axialTilt: number;
+  moonCount: number;
   textureUrl?: string;
 }
 

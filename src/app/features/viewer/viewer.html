@@ -14,11 +14,12 @@
     </button>
   </div>
 
-  @if (state.selectedPlanet()) {
-    <app-planet-panel
-      [planet]="state.selectedPlanet()"
-      (close)="state.selectPlanet(null)" />
-  }
+ @if (state.selectedPlanet(); as planet) {
+  <app-planet-panel
+    [planet]="planet"
+    (close)="state.selectPlanet(null)" />
+}
+
 
   @if (loading) {
     <div class="loading-overlay">
