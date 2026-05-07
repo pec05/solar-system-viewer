@@ -27,8 +27,8 @@ export class SceneService {
   // Échelle visuelle : 1 UA = 10 unités Three.js
   private readonly AU = 10;
   // Échelle des rayons (sinon les planètes seraient invisibles)
-  private readonly RADIUS_SCALE = 0.004;
-  private readonly MIN_RADIUS = 0.3;
+  private readonly RADIUS_SCALE = 0.001;
+  private readonly MIN_RADIUS = 0.2;
 
   initScene(canvas: ElementRef<HTMLCanvasElement>): void {
     const el = canvas.nativeElement;
@@ -42,7 +42,7 @@ export class SceneService {
 
     //Camera
     this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    this.camera.position.set(0, 80, 120);
+    this.camera.position.set(0, 120, 200);
     this.camera.lookAt(0, 0, 0);
 
     //Renderer
@@ -127,13 +127,13 @@ export class SceneService {
   }
 
   private addSun(): void {
-    const geometry = new THREE.SphereGeometry(2, 32, 32);
+    const geometry = new THREE.SphereGeometry(1.2, 32, 32);
     const material = new THREE.MeshBasicMaterial({ color: 0xFDB813 });
     const sun = new THREE.Mesh(geometry, material);
     this.scene.add(sun);
 
     // Halo lumineux autour du soleil
-    const glowGeometry = new THREE.SphereGeometry(2.4, 32, 32);
+    const glowGeometry = new THREE.SphereGeometry(1.6, 32, 32);
     const glowMaterial = new THREE.MeshBasicMaterial({
       color: 0xFDB813,
       transparent: true,
