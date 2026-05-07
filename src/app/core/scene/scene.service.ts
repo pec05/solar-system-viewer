@@ -1,5 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Planet } from '../models/planet.model';
 
 @Injectable({ providedIn: 'root' })
@@ -7,6 +8,7 @@ export class SceneService {
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
+  private controls!: OrbitControls;
   private animationId!: number;
   private planetMeshes: Map<string, THREE.Mesh> = new Map();
   private orbitLines: THREE.Line[] = [];
@@ -40,7 +42,7 @@ export class SceneService {
 
     //Camera
     this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    this.camera.position.set(0, 40, 60);
+    this.camera.position.set(0, 80, 120);
     this.camera.lookAt(0, 0, 0);
 
     //Renderer
@@ -55,6 +57,15 @@ export class SceneService {
     const sunLight = new THREE.PointLight(0xffffff, 3, 300);
     sunLight.position.set(0, 0, 0);
     this.scene.add(sunLight);
+
+    // OrbitControls pour permettre la navigation
+    this.controls = new OrbitControls(this.camera, el);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.05;
+    this.controls.minDistance = 5;
+    this.controls.maxDistance = 400;
+    this.controls.enablePan = true;
+
 
     // Étoiles en arrière-plan
     this.addStarField();
@@ -80,7 +91,7 @@ export class SceneService {
   startAnimation(): void {
     const animate = () => {
       this.animationId = requestAnimationFrame(animate);
-
+      this.controls.update();
       if (!this.isPaused) {
         const delta = this.clock.getDelta() * this.simulationSpeed;
         this.updatePlanetPositions(delta);
