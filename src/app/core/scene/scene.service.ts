@@ -31,18 +31,21 @@ export class SceneService {
   initScene(canvas: ElementRef<HTMLCanvasElement>): void {
     const el = canvas.nativeElement;
 
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
     //Scene
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x000010);
 
     //Camera
-    this.camera = new THREE.PerspectiveCamera(60, el.clientWidth / el.clientHeight, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
     this.camera.position.set(0, 40, 60);
     this.camera.lookAt(0, 0, 0);
 
     //Renderer
     this.renderer = new THREE.WebGLRenderer({ canvas: el, antialias: true });
-    this.renderer.setSize(el.clientWidth, el.clientHeight);
+    this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio);
 
     // Lumières
@@ -241,8 +244,8 @@ export class SceneService {
   }
 
   private onResize(canvas: HTMLCanvasElement): void {
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
