@@ -1,0 +1,19 @@
+<div class="nav-panel">
+  <h3 class="nav-title">🪐 Système Solaire</h3>
+
+  <div class="planet-list">
+    @for (planet of sortedPlanets; track planet.id) {
+      <button
+        class="planet-item"
+        [class.active]="selectedId === planet.id"
+        (click)="select(planet)">
+        <span
+          class="planet-dot"
+          [style.background]="getColor(planet)">
+        </span>
+        <span class="planet-name">{{ planet.englishName }}</span>
+        <span class="planet-dist">{{ planet.distanceFromSun }} UA</span>
+      </button>
+    }
+  </div>
+</div>

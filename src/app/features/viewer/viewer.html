@@ -2,6 +2,10 @@
   <canvas #canvas class="scene-canvas"></canvas>
 
   <div class="controls-overlay">
+    <app-planet-nav
+      [planets]="planets"
+      [selectedId]="state.selectedPlanet()?.id ?? null"
+      (planetSelected)="navigateToPlanet($event)" />
     <app-speed-control />
   </div>
 

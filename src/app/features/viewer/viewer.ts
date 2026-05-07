@@ -4,10 +4,12 @@ import { SceneState } from '../../core/services/scene-state';
 import { SolarApiService } from '../../core/services/solar-api.service';
 import { SceneService } from '../../core/scene/scene.service';
 import { PlanetPanel } from "../planet-panel/planet-panel";
-
+import { PlanetNav } from '../planet-nav/planet-nav';
+import { Planet } from '../../core/models/planet.model';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-viewer',
-  imports: [SpeedControl, PlanetPanel],
+  imports: [SpeedControl, PlanetPanel, PlanetNav, CommonModule],
   templateUrl: './viewer.html',
   styleUrl: './viewer.scss',
 })
@@ -16,6 +18,8 @@ export class Viewer implements AfterViewInit, OnDestroy {
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 
   loading = true;
+
+  planets: Planet[] = [];
 
   constructor(
     public state : SceneState,
@@ -27,6 +31,7 @@ export class Viewer implements AfterViewInit, OnDestroy {
    this.sceneService.initScene(this.canvasRef);
 
     this.solarApi.getAllPlanets().subscribe(planets => {
+      this.planets = planets;
       this.sceneService.loadPlanets(planets);
       this.loading = false;
       this.sceneService.startAnimation();
@@ -50,4 +55,9 @@ export class Viewer implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.sceneService.stopAnimation();
   }
+
+  navigateToPlanet(planet: Planet): void {
+  this.state.selectPlanet(planet);
+  this.sceneService.focusOnPlanet(planet.id);
+}
 }

@@ -122,8 +122,18 @@ export class SceneService {
     if (!mesh) return;
 
     const pos = mesh.position;
-    this.camera.position.set(pos.x + 5, pos.y + 5, pos.z + 5);
+    const radius = (mesh.geometry as THREE.SphereGeometry).parameters.radius;
+
+    // Zoom à 8x le rayon de la planète
+    const offset = Math.max(radius * 8, 3);
+    this.camera.position.set(
+      pos.x + offset,
+      pos.y + offset * 0.5,
+      pos.z + offset
+    );
     this.camera.lookAt(pos);
+    this.controls.target.set(pos.x, pos.y, pos.z);
+    this.controls.update();
   }
 
   private addSun(): void {

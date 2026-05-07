@@ -1,0 +1,67 @@
+.nav-panel {
+  background: rgba(0, 0, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px;
+  width: 220px;
+  backdrop-filter: blur(10px);
+  color: white;
+}
+
+.nav-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+}
+
+.planet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.planet-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    background: rgba(125, 232, 232, 0.1);
+    border-color: rgba(125, 232, 232, 0.3);
+  }
+}
+
+.planet-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.planet-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  flex: 1;
+}
+
+.planet-dist {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+}
